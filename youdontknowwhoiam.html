@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>youdontknowwhoiam.org</title>
+  </head>
+  <body>
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/Gkw6xQQpUJg?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <h1>You are an idiot!</h1>
+    <script>
+      window.onload = function() {
+        setInterval(function() {
+          var x_speed = Math.floor(Math.random() * (10)) + 1;
+          var y_speed = Math.floor(Math.random() * (10)) + 1;
+          var x = Math.floor(Math.random() * (screen.width - 250));
+          var y = Math.floor(Math.random() * (screen.height - 250));
+          var originalWindow = window;
+          while (originalWindow.parent != originalWindow) {
+            originalWindow = originalWindow.parent;
+          }
+          for (var i = 0; i < 3; i++) {
+            var newWindow = originalWindow.open("", "_blank", "width=200,height=200,left=" + x + ",top=" + y);
+            var randomGifIndex = Math.floor(Math.random() * 4) + 1;
+            var gifUrl = 'https://media.tenor.com/cvQ9vsRu7tgAAAAC/he-he-haw.gif';
+            if (randomGifIndex == 1) {
+              gifUrl = 'https://media.tenor.com/cvQ9vsRu7tgAAAAC/he-he-haw.gif';
+            } else if (randomGifIndex == 2) {
+              gifUrl = 'https://media.tenor.com/W9t4G8la9w4AAAAd/you-are-idiot.gif';
+            } else if (randomGifIndex == 3) {
+              gifUrl = 'https://media.tenor.com/jcP81VCwMvYAAAAC/you-are-an-idiot-fighting.gif';
+            } else {
+              gifUrl = 'https://media.tenor.com/JCygSDApsNAAAAAC/grrr-heheheha.gif';
+            }
+            newWindow.document.write('<img src="' + gifUrl + '" width="200" height="200">');
+            newWindow.x = x;
+            newWindow.y = y;
+            newWindow.x_speed = x_speed;
+            newWindow.y_speed = y_speed;
+            newWindow.moveWindow = function() {
+              if (this.x + 200 >= screen.width || this.x <= 0) {
+                this.x_speed = -this.x_speed;
+              }
+              if (this.y + 200 >= screen.height || this.y <= 0) {
+                this.y_speed = -this.y_speed;
+              }
+              this.x += this.x_speed;
+              this.y += this.y_speed;
+              this.moveTo(this.x, this.y);
+            }
+            setInterval(function() {
+              newWindow.moveWindow();
+            }, 10);
+            x += 50;
+            y += 50;
+          }
+        }, 10000);
+      };
+    </script>
+  </body>
+</html>
